@@ -39,6 +39,7 @@ struct ContentView: View {
             }.hidden()
         }
         .onAppear {
+            
             SettingsBundleHelper.setVersionAndBuildNumber()
             managedAppConfig = SettingsBundleHelper.checkAndExecuteSettings()
             
@@ -79,7 +80,7 @@ class SettingsBundleHelper {
 
 //            let appDomain: String? = Bundle.main.bundleIdentifier
 //            UserDefaults.standard.removePersistentDomain(forName: appDomain!)
-            print(managedAppConfig);
+//            print(managedAppConfig);
             // reset userDefaults..
             // CoreDataDataModel().deleteAllData()
             // delete all other user data here..
@@ -89,13 +90,18 @@ class SettingsBundleHelper {
     
     class func setVersionAndBuildNumber() {
         let version: String = Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as! String
-        UserDefaults.standard.set(version, forKey: SettingsBundleKeys.AppVersion)
-//        let build: String = Bundle.main.object(forInfoDictionaryKey: "CFBundleVersion") as! String
-        let appName: String = Bundle.main.object(forInfoDictionaryKey: "CFBundleDisplayName") as! String
-        UserDefaults.standard.set(appName, forKey: SettingsBundleKeys.AppName)
-        UserDefaults.standard.set("psc_admin", forKey: SettingsBundleKeys.LoginUsername)
-        UserDefaults.standard.set("psc_admin", forKey: SettingsBundleKeys.LoginPassword)
-        UserDefaults.standard.set(true, forKey: SettingsBundleKeys.AutoLogin)
+
+        if UserDefaults.standard.value(forKey: SettingsBundleKeys.AppVersion) as! String != version {
+            let version: String = Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as! String
+            UserDefaults.standard.set(version, forKey: SettingsBundleKeys.AppVersion)
+            let appName: String = Bundle.main.object(forInfoDictionaryKey: "CFBundleDisplayName") as! String
+
+            //        let build: String = Bundle.main.object(forInfoDictionaryKey: "CFBundleVersion") as! String
+            UserDefaults.standard.set(appName, forKey: SettingsBundleKeys.AppName)
+            UserDefaults.standard.set("psc_admin", forKey: SettingsBundleKeys.LoginUsername)
+            UserDefaults.standard.set("psc_admin", forKey: SettingsBundleKeys.LoginPassword)
+            UserDefaults.standard.set(true, forKey: SettingsBundleKeys.AutoLogin)
+        }
     }
 }
 //xcrun simctl spawn booted defaults write com.stl.AppConfigTest com.apple.configuration.managed -dict
