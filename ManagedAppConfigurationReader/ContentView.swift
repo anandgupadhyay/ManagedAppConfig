@@ -91,15 +91,16 @@ class SettingsBundleHelper {
     class func setVersionAndBuildNumber() {
 //        let version: String = Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as! String
     let systemBuildVersion: String = Bundle.main.object(forInfoDictionaryKey: "CFBundleVersion") as! String
-    let savedBuildVersion = UserDefaults.standard.value(forKey: SettingsBundleKeys.AppVersion)
+    let savedBuildVersion = UserDefaults.standard.value(forKey: SettingsBundleKeys.AppVersion) as? String
         //For the First Installation
-        if let appBuildVersion = savedBuildVersion {
+        if savedBuildVersion != nil {
             //For subsequent installation if we want to override the settings then
-            if appBuildVersion as! String != systemBuildVersion {
+            if savedBuildVersion! == systemBuildVersion {
+                // No Need to write anything as the device already has the latest configuration
+                print("No Need to Setup Settings")
+            }else{
                 SettingsBundleHelper.addDefaultSettings()
                 
-            }else{
-                // No Need to write anything as the device already has the latest configuration
             }
         }else{
             SettingsBundleHelper.addDefaultSettings()//rewrite the settings as its th First time isntallation
@@ -107,14 +108,17 @@ class SettingsBundleHelper {
     }
     
     class func addDefaultSettings(){
+        let systemBuildVersion: String = Bundle.main.object(forInfoDictionaryKey: "CFBundleVersion") as! String
+        UserDefaults.standard.set(systemBuildVersion, forKey: SettingsBundleKeys.AppVersion)
         let savedBuildVersion = UserDefaults.standard.value(forKey: SettingsBundleKeys.AppVersion)
-        UserDefaults.standard.set(savedBuildVersion, forKey: SettingsBundleKeys.AppVersion)
+        print("saved appversion \(String(describing: savedBuildVersion))")
         let appName: String = Bundle.main.object(forInfoDictionaryKey: "CFBundleDisplayName") as! String
         
         UserDefaults.standard.set(appName, forKey: SettingsBundleKeys.AppName)
         UserDefaults.standard.set("psc_admin", forKey: SettingsBundleKeys.LoginUsername)
         UserDefaults.standard.set("psc_admin", forKey: SettingsBundleKeys.LoginPassword)
         UserDefaults.standard.set(true, forKey: SettingsBundleKeys.AutoLogin)
+        
     }
 }
 //xcrun simctl spawn booted defaults write com.stl.AppConfigTest com.apple.configuration.managed -dict
