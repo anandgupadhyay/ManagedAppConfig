@@ -72,24 +72,14 @@ class SettingsBundleHelper {
     
     class func checkAndExecuteSettings()->[String:String]{
         var managedAppConfig = [String: String]()
-//        if UserDefaults.standard.bool(forKey: SettingsBundleKeys.AutoLogin){
             
         managedAppConfig[SettingsBundleKeys.AutoLogin] = UserDefaults.standard.bool(forKey: SettingsBundleKeys.AutoLogin) ? "True" : "False"
             managedAppConfig[SettingsBundleKeys.LoginUsername] = UserDefaults.standard.value(forKey: SettingsBundleKeys.LoginUsername) as? String
             managedAppConfig[SettingsBundleKeys.LoginPassword] = UserDefaults.standard.value(forKey: SettingsBundleKeys.LoginPassword) as? String
-
-//            let appDomain: String? = Bundle.main.bundleIdentifier
-//            UserDefaults.standard.removePersistentDomain(forName: appDomain!)
-//            print(managedAppConfig);
-            // reset userDefaults..
-            // CoreDataDataModel().deleteAllData()
-            // delete all other user data here..
-//        }
         return managedAppConfig
     }
     
     class func setVersionAndBuildNumber() {
-//        let version: String = Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as! String
     let systemBuildVersion: String = Bundle.main.object(forInfoDictionaryKey: "CFBundleVersion") as! String
     let savedBuildVersion = UserDefaults.standard.value(forKey: SettingsBundleKeys.AppVersion) as? String
         //For the First Installation

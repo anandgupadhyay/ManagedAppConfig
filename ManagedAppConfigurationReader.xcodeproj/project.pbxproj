@@ -278,7 +278,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1.1;
 				DEVELOPMENT_ASSET_PATHS = "\"ManagedAppConfigurationReader/Preview Content\"";
-				DEVELOPMENT_TEAM = TC6Y6GF2PT;
+				DEVELOPMENT_TEAM = 38L7ZMD32K;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_CFBundleDisplayName = eParlKenyaAutoLogin;
@@ -310,7 +310,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1.1;
 				DEVELOPMENT_ASSET_PATHS = "\"ManagedAppConfigurationReader/Preview Content\"";
-				DEVELOPMENT_TEAM = TC6Y6GF2PT;
+				DEVELOPMENT_TEAM = 38L7ZMD32K;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_CFBundleDisplayName = eParlKenyaAutoLogin;
